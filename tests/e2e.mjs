@@ -189,7 +189,7 @@ console.log("Appointment form");
   const outcome = form.getByRole("status").or(form.getByRole("alert").filter({ hasText: "not sent" }));
   await outcome.first().waitFor({ timeout: 15000 }).catch(() => {});
   const text = (await outcome.first().textContent().catch(() => "")) ?? "";
-  if (/demo only/i.test(text)) pass("demo mode reports that nothing was sent");
+  if (/not available yet/i.test(text)) pass("unconfigured form reports that nothing was sent");
   else if (/received your request/i.test(text)) pass("live mode shows confirmation");
   else if (/request was not sent/i.test(text)) {
     // Delivery failed: the visitor must be told clearly. Expected only when EXPECT_DELIVERY_FAILURE=1.

@@ -16,10 +16,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type Status = "idle" | "submitting" | "success" | "demo-success" | "error";
+type Status = "idle" | "submitting" | "success" | "unavailable" | "error";
 
 interface AppointmentFormProps {
-  /** True when a delivery method is configured on the server. Otherwise the form runs in demo mode. */
+  /**
+   * True when a delivery method is configured on the server. Otherwise the form still validates,
+   * but tells the visitor that online requests are not available yet and sends nothing.
+   */
   live: boolean;
   /** Contact fallback shown when sending fails. */
   fallbackContact: ReactNode;
@@ -101,7 +104,7 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (status === "success" || status === "demo-success") resultRef.current?.focus();
+    if (status === "success" || status === "unavailable") resultRef.current?.focus();
   }, [status]);
 
   const fid = (name: string) => `${id}-${name}`;
@@ -141,8 +144,8 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
     if (!data) return;
 
     if (!live) {
-      // Demo mode: nothing leaves the browser.
-      setStatus("demo-success");
+      // Online requests are not enabled yet: nothing leaves the browser.
+      setStatus("unavailable");
       return;
     }
 
@@ -182,8 +185,8 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
     setStatus("idle");
   }
 
-  if (status === "success" || status === "demo-success") {
-    const demo = status === "demo-success";
+  if (status === "success" || status === "unavailable") {
+    const unavailable = status === "unavailable";
     return (
       <div
         ref={resultRef}
@@ -192,27 +195,24 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
         aria-live="polite"
         className={cn(
           "rounded-2xl border p-8 text-center focus:outline-none sm:p-10",
-          demo ? "border-amber-300 bg-amber-50" : "border-teal-200 bg-teal-50",
+          unavailable ? "border-navy-200 bg-navy-50" : "border-teal-200 bg-teal-50",
         )}
       >
         <span
           className={cn(
             "mx-auto flex h-16 w-16 items-center justify-center rounded-full",
-            demo ? "bg-amber-100 text-amber-800" : "bg-teal-100 text-teal-700",
+            unavailable ? "bg-navy-100 text-navy-700" : "bg-teal-100 text-teal-700",
           )}
         >
-          {demo ? <Info className="h-8 w-8" aria-hidden="true" /> : <CheckCircle2 className="h-8 w-8" aria-hidden="true" />}
+          {unavailable ? <Info className="h-8 w-8" aria-hidden="true" /> : <CheckCircle2 className="h-8 w-8" aria-hidden="true" />}
         </span>
-        {demo ? (
+        {unavailable ? (
           <>
-            <h3 className="mt-6 text-2xl font-bold">Demo only: your request was not sent</h3>
+            <h3 className="mt-6 text-2xl font-bold">Online requests are not available yet</h3>
             <p className="mx-auto mt-4 max-w-md leading-relaxed text-ink">
-              Your details passed validation, but online appointment requests are not enabled on this preview yet, so no
-              information was sent or stored.
+              Your request has not been sent. To request an appointment, please contact the practice directly.
             </p>
-            <p className="mx-auto mt-3 max-w-md text-[0.95rem] text-muted">
-              To request an appointment, please contact the practice directly.
-            </p>
+            <div className="mx-auto mt-4 max-w-md text-[0.95rem] text-muted">{fallbackContact}</div>
           </>
         ) : (
           <>
@@ -227,7 +227,7 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
         )}
         <Button variant="outline" className="mt-8" onClick={reset}>
           <RotateCcw className="h-4 w-4" aria-hidden="true" />
-          {demo ? "Start over" : "Submit another request"}
+          {unavailable ? "Back to the form" : "Submit another request"}
         </Button>
       </div>
     );
@@ -243,11 +243,11 @@ export function AppointmentForm({ live, fallbackContact }: AppointmentFormProps)
       </p>
 
       {!live && (
-        <div className="flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-[0.95rem] text-amber-950">
-          <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+        <div className="flex gap-3 rounded-xl border border-teal-200 bg-teal-50/60 p-4 text-[0.95rem] text-ink">
+          <Info className="mt-0.5 h-5 w-5 shrink-0 text-teal-700" aria-hidden="true" />
           <p>
-            <strong>Demo mode.</strong> Online appointment requests are not enabled yet. You can try the form, but
-            nothing will be sent or stored.
+            <strong>Online appointment requests are coming soon.</strong> Until then, please contact the practice
+            directly to request an appointment.
           </p>
         </div>
       )}
