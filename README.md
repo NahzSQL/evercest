@@ -119,7 +119,7 @@ SCREENSHOTS=./screenshots npm run test:e2e   # also save full-page screenshots
 
 ## Deployment
 
-**Vercel (recommended):** import the repository, set the **Root Directory** to `evercrest`, add any environment variables from `.env.example`, and deploy. Then set `siteConfig.url` to the live domain and redeploy, so canonical URLs and the sitemap use it.
+**Vercel (recommended):** import the repository (Vercel detects Next.js automatically), add any environment variables from `.env.example`, and deploy. Then set `siteConfig.url` to the live domain and redeploy, so canonical URLs and the sitemap use it.
 
 **Any Node.js host:** `npm ci && npm run build && npm start` (set `PORT` as needed), behind HTTPS.
 
