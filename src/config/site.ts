@@ -47,8 +47,6 @@ export interface SiteConfig {
     /** Suite, unit, or floor. */
     addressLine2: string | null;
     postalCode: string | null;
-    /** Optional map embed URL (e.g. Google Maps "Embed a map" src). Only set once the street address is verified. */
-    mapEmbedUrl: string | null;
     /** Optional link to directions (e.g. a Google Maps place link). */
     mapLink: string | null;
   };
@@ -105,13 +103,12 @@ export const siteConfig: SiteConfig = {
     streetAddress: null,
     addressLine2: null,
     postalCode: null,
-    mapEmbedUrl: null,
     mapLink: null,
   },
   contact: {
-    phone: null,
-    phoneHref: null,
-    email: null,
+    phone: "(251) 520-4334",
+    phoneHref: "+12515204334",
+    email: "wellsmuffle@evercrest.fit",
     fax: null,
   },
   officeHours: [

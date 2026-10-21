@@ -7,7 +7,7 @@ To change a detail later, edit the file listed. Most items are in `src/config/si
 | # | Item | Decision | Set in |
 | --- | --- | --- | --- |
 | 1 | Location | **Delaware, USA.** No street address, city, ZIP code, or map is shown. | `siteConfig.location` |
-| 1 | Phone and email | Not shown | `siteConfig.contact` |
+| 1 | Phone and email | **(251) 520-4334** · **wellsmuffle@evercrest.fit** | `siteConfig.contact` |
 | 2 | Office hours | **Standard hours:** Monday–Friday, 9:00 AM – 5:00 PM; Saturday and Sunday closed | `siteConfig.officeHours` |
 | 3 | Dentist | **Not named.** The dentist profile section has been removed. | — |
 | 4 | Services | **Confirmed:** all eight services | `src/config/services.ts` |
@@ -21,8 +21,7 @@ To change a detail later, edit the file listed. Most items are in `src/config/si
 
 Each of these appears on the site automatically once it is filled in. Nothing shows until then.
 
-- Phone number and email (`siteConfig.contact`)
-- Street address, city, ZIP code, map, and directions link (`siteConfig.location`)
+- Street address, city, ZIP code, and directions link (`siteConfig.location`)
 - A list of specific insurance plans, payment methods, or financing (`siteConfig.insurance`)
 - Cancellation or late-arrival policy text (`siteConfig.policies`)
 - Social media links (`siteConfig.social`)

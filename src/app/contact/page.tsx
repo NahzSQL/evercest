@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CalendarClock, ExternalLink, Lock, ShieldAlert } from "lucide-react";
-import { hasFullAddress, siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site";
 import { pageMetadata } from "@/lib/seo";
 import { AppointmentForm } from "@/components/appointment-form";
 import { ContactDetails, OfficeHours } from "@/components/contact-info";
@@ -40,7 +40,7 @@ function FallbackContact() {
 }
 
 export default function ContactPage() {
-  const { location, practiceManagement } = siteConfig;
+  const { practiceManagement } = siteConfig;
 
   return (
     <>
@@ -119,18 +119,6 @@ export default function ContactPage() {
               <div className="rounded-3xl border border-line bg-white p-8 shadow-soft">
                 <OfficeHours />
               </div>
-              {location.mapEmbedUrl && hasFullAddress() && (
-                <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-soft">
-                  <iframe
-                    title={`Map showing the location of ${siteConfig.name}`}
-                    src={location.mapEmbedUrl}
-                    className="block h-72 w-full border-0"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
-                </div>
-              )}
             </aside>
           </div>
         </Container>

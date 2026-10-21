@@ -37,7 +37,7 @@ Also generated: `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, favicon (`s
 
 | What | Where |
 | --- | --- |
-| Address, city, ZIP, map | `siteConfig.location` |
+| Address, city, ZIP | `siteConfig.location` |
 | Phone, email | `siteConfig.contact` |
 | Office hours | `siteConfig.officeHours` |
 | Dentist name, biography, education, licensure, photo | `siteConfig.dentist` |
@@ -54,7 +54,7 @@ Also generated: `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, favicon (`s
 
 See **[CONFIRMATION-CHECKLIST.md](CONFIRMATION-CHECKLIST.md)** for the practice's decisions on each detail, and the optional details that can be added later.
 
-Once the city and address are confirmed, update `siteConfig.location`. The contact details, footer, map, structured data (schema.org `Dentist`), and page metadata all pick them up automatically. Consider adding the city to the page descriptions in each `page.tsx` too.
+Once the city and address are confirmed, update `siteConfig.location`. The contact details, footer, structured data (schema.org `Dentist`), and page metadata all pick them up automatically. Consider adding the city to the page descriptions in each `page.tsx` too.
 
 ## Photography
 
